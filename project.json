@@ -1,0 +1,78 @@
+{
+  "name": "fcc-drum-machine",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "./src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/fcc-drum-machine"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "fcc-drum-machine:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "fcc-drum-machine:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "fcc-drum-machine:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "fcc-drum-machine:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "fcc-drum-machine:build:development"
+        },
+        "production": {
+          "buildTarget": "fcc-drum-machine:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/fcc-drum-machine"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "coverage/fcc-drum-machine"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["./src/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "fcc-drum-machine:build"
+      }
+    }
+  },
+  "tags": []
+}
